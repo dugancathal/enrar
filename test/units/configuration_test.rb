@@ -90,17 +90,24 @@ describe 'configurations' do
     end
   end
 
-  describe Enrar, '.initialize!' do
-    it 'loads the environment and sets up ActiveRecord' do
+  describe 'a test project' do
+    before(:each) do
+      ENV['ENRAR_ENV'] = 'development'
+      Enrar.clear_config!
+      Enrar.root = File.expand_path('../../fixtures/test_project', __FILE__)
       Enrar.initialize!
-      
     end
-  end
 
-  describe ActiveRecord::Base, '.configurations' do
-    it 'is set with Enrar.db_config' do
-      parsed_yaml = YAML::load_file(Enrar.db_config)
-      ActiveRecord::Base.configurations.must_equal parsed_yaml
+    describe Enrar, '.initialize!' do
+      it 'loads the environment and sets up ActiveRecord' do
+      end
+    end
+
+    describe ActiveRecord::Base, '.configurations' do
+      it 'is set with Enrar.db_config' do
+        parsed_yaml = YAML::load_file(Enrar.db_config)
+        ActiveRecord::Base.configurations.must_equal parsed_yaml
+      end
     end
   end
 end

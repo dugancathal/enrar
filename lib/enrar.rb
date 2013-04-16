@@ -59,4 +59,10 @@ module Enrar
   def self.flag
     'Gemfile'
   end
+
+  def self.initialize!
+    ActiveRecord::Base.configurations = YAML::load_file(db_config.to_s)
+    ActiveRecord::Base.establish_connection ActiveRecord::Base.configurations[env]
+    true
+  end
 end
