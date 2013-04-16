@@ -63,6 +63,7 @@ describe 'configurations' do
     before(:each) { Enrar.clear_config! }
 
     it 'defaults to "development"' do
+      ENV['ENRAR_ENV'] = nil
       Enrar.env.must_equal 'development'
     end
 
