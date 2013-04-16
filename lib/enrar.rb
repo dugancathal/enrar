@@ -2,6 +2,7 @@ require "enrar/version"
 require 'pathname'
 
 require 'active_record'
+require 'active_support/core_ext/string'
 
 require 'enrar/migration'
 

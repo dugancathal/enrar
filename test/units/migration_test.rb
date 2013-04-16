@@ -11,10 +11,15 @@ describe Enrar::Migration do
 
   describe 'generating a migration' do
     before(:each) do
+      @test_directory = File.expand_path('../../fixtures/test_project', __FILE__)
       ENV['ENRAR_ENV'] = 'development'
       Enrar.clear_config!
-      Enrar.root = File.expand_path('../../fixtures/test_project', __FILE__)
+      Enrar.root = @test_directory
       Enrar.initialize!
+    end
+
+    after(:each) do
+      FileUtils.rm_r @test_directory + '/db'
     end
 
     it 'creates a migration file' do
