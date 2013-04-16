@@ -60,12 +60,13 @@ describe 'configurations' do
   end
 
   describe Enrar, '.env' do
+    before(:each) { Enrar.clear_config! }
+
     it 'defaults to "development"' do
       Enrar.env.must_equal 'development'
     end
 
     it 'is set-able via CLI option ENRAR_ENV' do
-      Enrar.clear_config!
       ENV['ENRAR_ENV'] = 'production'
       Enrar.env.must_equal 'production'
     end
