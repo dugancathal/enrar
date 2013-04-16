@@ -50,31 +50,29 @@ describe 'configurations' do
     end
   end
 
-  describe Enrar, '.clear_config!' do
-    it 'clears out all the configuration settings' do
-      default_root = Enrar.root
-      Enrar.root = '/lib/some/where'
-      Enrar.clear_config!
-      Enrar.root.must_equal default_root
-    end
-  end
-
-  describe Enrar, '.env' do
-    before(:each) { Enrar.clear_config! }
-
-    it 'defaults to "development"' do
-      ENV['ENRAR_ENV'] = nil
-      Enrar.env.must_equal 'development'
-    end
-
-    it 'is set-able via CLI option ENRAR_ENV' do
-      ENV['ENRAR_ENV'] = 'production'
-      Enrar.env.must_equal 'production'
-    end
-  end
-
   describe Enrar do
     before(:each) { Enrar.clear_config! }
+
+    describe '.clear_config' do
+      it 'clears out all the configuration settings' do
+        default_root = Enrar.root
+        Enrar.root = '/lib/some/where'
+        Enrar.clear_config!
+        Enrar.root.must_equal default_root
+      end
+    end
+
+    describe '.env' do
+      it 'defaults to "development"' do
+        ENV['ENRAR_ENV'] = nil
+        Enrar.env.must_equal 'development'
+      end
+
+      it 'is set-able via CLI option ENRAR_ENV' do
+        ENV['ENRAR_ENV'] = 'production'
+        Enrar.env.must_equal 'production'
+      end
+    end
 
     describe '.loaded_rake_tasks' do
       it 'returns an empty array initially' do
