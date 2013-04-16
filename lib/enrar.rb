@@ -3,6 +3,8 @@ require 'pathname'
 
 require 'active_record'
 
+require 'enrar/migration'
+
 module Enrar
   def self.env
     @@env ||= (ENV['ENRAR_ENV'] || 'development')
