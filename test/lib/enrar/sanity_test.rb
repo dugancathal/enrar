@@ -1,7 +1,18 @@
 require 'test_helper'
 
-class SanityTest < MiniTest::Unit::TestCase
-  def test_that_all_is_well
-    assert true
+describe 'Sanity' do
+  it 'passes' do
+    true.must_equal true
+  end
+
+  describe 'secretfile:generate', 'A test that rake testing works' do
+    after(:all) do
+      File.delete '.super-secret'
+    end
+
+    it 'generates the secret file' do
+      i_call_rake_task 'secretfile:generate'
+      File.exists?('.super-secret').must_equal true
+    end
   end
 end
