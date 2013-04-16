@@ -72,16 +72,20 @@ describe 'configurations' do
     end
   end
 
-  describe Enrar, '.loaded_rake_tasks' do
-    it 'returns an empty array initially' do
-      Enrar.loaded_rake_tasks.must_be_empty
-    end
-  end
+  describe Enrar do
+    before(:each) { Enrar.clear_config! }
 
-  describe Enrar, '.load_rake_tasks!' do
-    it 'loads all the rake tasks in Enrar.gem_root.join(lib/tasks)' do
-      Enrar.load_rake_tasks!
-      Enrar.loaded_rake_tasks.wont_be_empty
+    describe '.loaded_rake_tasks' do
+      it 'returns an empty array initially' do
+        Enrar.loaded_rake_tasks.must_be_empty
+      end
+    end
+
+    describe '.load_rake_tasks!' do
+      it 'loads all the rake tasks in Enrar.gem_root.join(tasks)' do
+        Enrar.load_rake_tasks!
+        Enrar.loaded_rake_tasks.wont_be_empty
+      end
     end
   end
 
