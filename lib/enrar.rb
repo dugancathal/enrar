@@ -10,6 +10,10 @@ module Enrar
     @@db_config ||= root.join('config', 'database.yml')
   end
 
+  def self.root=(path)
+    @@root = Pathname(path)
+  end
+
   def self.root
     @@root ||= begin
       root_path = Dir.pwd
