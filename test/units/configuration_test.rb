@@ -20,7 +20,6 @@ describe 'configurations' do
     end
   end
 
-
   describe Enrar, '.root=' do
     def new_root 
       File.expand_path('../../fixtures/test_project', __FILE__)
@@ -48,6 +47,27 @@ describe 'configurations' do
 
     it 'is a YAML file' do
       Enrar.db_config.basename.to_s.must_match /ya?ml/i
+    end
+  end
+
+  describe Enrar, '.clear_config!' do
+    it 'clears out all the configuration settings' do
+      default_root = Enrar.root
+      Enrar.root = '/lib/some/where'
+      Enrar.clear_config!
+      Enrar.root.must_equal default_root
+    end
+  end
+
+  describe Enrar, '.env' do
+    it 'defaults to "development"' do
+      Enrar.env.must_equal 'development'
+    end
+
+    it 'is set-able via CLI option ENRAR_ENV' do
+      Enrar.clear_config!
+      ENV['ENRAR_ENV'] = 'production'
+      Enrar.env.must_equal 'production'
     end
   end
 end

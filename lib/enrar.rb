@@ -2,6 +2,10 @@ require "enrar/version"
 require 'pathname'
 
 module Enrar
+  def self.env
+    @@env ||= (ENV['ENRAR_ENV'] || 'development')
+  end
+
   def self.gem_root
     @@gem_root ||= Pathname(File.expand_path('../', __FILE__))
   end
@@ -29,6 +33,12 @@ module Enrar
       RbConfig::CONFIG['host_os'] =~ /mswin|mingw/ ?
         Pathname.new(root).expand_path : Pathname.new(root).realpath
     end
+  end
+
+  def self.clear_config!
+    @@env = nil
+    @@root = nil
+    @@db_config = nil
   end
 
   # This is a file that designates the top-level of a project
