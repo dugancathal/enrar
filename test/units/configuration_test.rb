@@ -71,4 +71,31 @@ describe 'configurations' do
       Enrar.env.must_equal 'production'
     end
   end
+
+  describe Enrar, '.loaded_rake_tasks' do
+    it 'returns an empty array initially' do
+      Enrar.loaded_rake_tasks.must_be_empty
+    end
+  end
+
+  describe Enrar, '.load_rake_tasks!' do
+    it 'loads all the rake tasks in Enrar.gem_root.join(lib/tasks)' do
+      Enrar.load_rake_tasks!
+      Enrar.loaded_rake_tasks.wont_be_empty
+    end
+  end
+
+  describe Enrar, '.initialize!' do
+    it 'loads the environment and sets up ActiveRecord' do
+      Enrar.initialize!
+      
+    end
+  end
+
+  describe ActiveRecord::Base, '.configurations' do
+    it 'is set with Enrar.db_config' do
+      parsed_yaml = YAML::load_file(Enrar.db_config)
+      ActiveRecord::Base.configurations.must_equal parsed_yaml
+    end
+  end
 end

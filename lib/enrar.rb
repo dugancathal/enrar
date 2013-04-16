@@ -1,6 +1,8 @@
 require "enrar/version"
 require 'pathname'
 
+require 'active_record'
+
 module Enrar
   def self.env
     @@env ||= (ENV['ENRAR_ENV'] || 'development')
