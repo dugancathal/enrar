@@ -64,6 +64,7 @@ module Enrar
   end
 
   def self.initialize!
+    load_rake_tasks!
     ActiveRecord::Base.configurations = YAML::load_file(db_config.to_s)
     ActiveRecord::Base.establish_connection ActiveRecord::Base.configurations[env]
     true

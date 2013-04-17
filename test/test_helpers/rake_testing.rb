@@ -1,5 +1,5 @@
 class MiniTest::Unit::TestCase
-  def i_call_rake_task(task_name)
+  def i_call_rake_task(task_name, *args)
     rake= nil
     Dir.chdir(Enrar.gem_root) do
       # Get an instance of rake
@@ -13,7 +13,7 @@ class MiniTest::Unit::TestCase
 
     task = rake[task_name]
     assert task, "No rake task defined: #{task_name}"
-    task.invoke
+    task.invoke *args
   end
 
   def loaded_files_excluding_current_rake_file(file)
