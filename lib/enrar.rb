@@ -56,24 +56,12 @@ module Enrar
     @@rake_tasks = nil
   end
 
-  def self.loaded_rake_tasks
-    @@rake_tasks ||= []
-  end
-
-  def self.load_rake_tasks!
-    gem_root.join('tasks').children.each do |task_file|
-      Rake.application.rake_require task_file.basename('.rake').to_s, [gem_root.join('tasks').to_s], $"
-      (@@rake_tasks ||= []) << task_file
-    end
-  end
-
   # This is a file that designates the top-level of a project
   def self.flag
     'Gemfile'
   end
 
   def self.initialize!
-    load_rake_tasks!
     ActiveRecord::Base.configurations = YAML::load_file(db_config.to_s)
     ActiveRecord::Base.establish_connection ActiveRecord::Base.configurations[env]
     true
