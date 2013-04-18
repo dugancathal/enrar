@@ -31,10 +31,9 @@ After you've added Ernar to your project, add the following lines to your Rakefi
 
 Then you can run around almost as if you're in Rails-land.
 
-    $ rake 'db:migrations:generate[migration_name]' # The quotes are necessary if you're in zsh.  You can leave them off in you're in bash.
-    $ rake 'db:migrate'
-    $ rake 'db:schema:dump'
-    $ rake 'db:schema:load'
+    $ rake 'enrar:db:migrations:generate[migration_name]' # The quotes are necessary if you're in zsh.  You can leave them off in you're in bash.
+    $ rake 'enrar:db:migrate'
+    $ rake 'enrar:db:version'
 
 Additionally, you can use Enrar in your code to manage the ActiveRecord configurations.
 
