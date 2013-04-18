@@ -31,17 +31,21 @@ module Enrar
     @@root ||= begin
       root_path = Dir.pwd
 
-      while root_path && File.directory?(root_path) && !File.exist?("#{root_path}/#{flag}")
+      while not_in_a_project_root?(root_path)
         parent = File.dirname(root_path)
         root_path = parent != root_path && parent
       end
 
-      root = File.exist?("#{root_path}/#{flag}") ? root_path : default
+      root = File.exist?("#{root_path}/#{flag}") ? root_path : nil
       raise "Could not find root path for #{self}" unless root
 
       RbConfig::CONFIG['host_os'] =~ /mswin|mingw/ ?
         Pathname.new(root).expand_path : Pathname.new(root).realpath
     end
+  end
+
+  def self.not_in_a_project_root?(root_path)
+    root_path && File.directory?(root_path) && !File.exist?("#{root_path}/#{flag}")
   end
 
   def self.clear_config!
