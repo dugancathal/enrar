@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["Thomas_Taylor2@cable.comcast.com"]
   spec.description   = %q{No Rails ActiveRecord}
   spec.summary       = %q{Primarily for ActiveRecord Migrations outside rails}
-  spec.homepage      = ""
+  spec.homepage      = "http://github.com/dugancathal/enrar"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
