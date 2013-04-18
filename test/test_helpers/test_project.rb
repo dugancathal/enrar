@@ -11,12 +11,12 @@ class MiniTest::Unit::TestCase
     Dir.chdir @test_directory
     Enrar.initialize!
 
-    @migration_versions = []
-    %w(create_tests create_posts create_users).each do |migration_name|
+    @migration_versions = %w(create_tests create_posts create_users).map do |migration_name|
       sample = File.read(File.expand_path("../../fixtures/#{migration_name}.rb", __FILE__))
       migration = Enrar::Migration.new(migration_name).generate!
       File.write(migration.path, sample)
-      @migration_versions << migration.version
+      sleep 0.001
+      migration.version
     end
   end
 

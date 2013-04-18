@@ -77,4 +77,9 @@ module Enrar
     ActiveRecord::Base.establish_connection ActiveRecord::Base.configurations[env]
     true
   end
+
+  def self.setup!
+    initialize!
+    ActiveRecord::Base.connection
+  end
 end
