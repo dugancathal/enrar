@@ -11,6 +11,7 @@ module Enrar
     def generate!
       FileUtils.mkdir_p path.dirname
       File.write(path.to_s, ERB.new(TEMPLATE).result(binding))
+      self
     end
 
     def path

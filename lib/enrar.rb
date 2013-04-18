@@ -6,8 +6,9 @@ require 'active_support/core_ext/string'
 
 require 'rake'
 
-require 'enrar/migration'
 require 'enrar/db'
+require 'enrar/migrator'
+require 'enrar/migration'
 
 module Enrar
   def self.env
