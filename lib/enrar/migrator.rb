@@ -7,7 +7,7 @@ module Enrar
       @version = to_version
     end
 
-    def migrate
+    def migrate!
       ActiveRecord::Migration.verbose = @verbose
       ActiveRecord::Migrator.migrate migrations_dir, @version
     end

@@ -28,14 +28,20 @@ module Enrar
 
     # Create the tasks defined by this task lib.
     def define
-      desc "Generate a migration. Don't forget to pass the migration name"
+      desc "Generate a migration (don't forget to pass the migration name)"
       task "#{@name}:migrations:generate", [:name] do |t, args|
+        raise 'Need a migration name' unless args[:name]
         Enrar::Migration.new(args[:name]).generate!
       end
 
-      desc "Create the db."
+      desc "Create the db"
       task "#{@name}:db:create" do
         Enrar::DB.new.create!
+      end
+
+      desc "Migrate the database (VERBOSE=true)"
+      task "#{@name}:db:migrate", [:version] do |t, args|
+        Enrar::Migrator.new(args[:version], verbose: ENV['VERBOSE']).migrate!
       end
       self
     end
