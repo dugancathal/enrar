@@ -23,7 +23,7 @@ module Enrar
     end
 
     def version
-      @version ||= Time.now.strftime('%Y%m%d%H%M%S%L')
+      @version ||= Time.now.strftime('%Y%m%d%H%M%S%L').to_i
     end
 
     TEMPLATE = <<-MIGRATION.strip_heredoc

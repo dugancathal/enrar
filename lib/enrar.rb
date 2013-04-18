@@ -9,6 +9,7 @@ require 'rake'
 require 'enrar/db'
 require 'enrar/migrator'
 require 'enrar/migration'
+require 'enrar/schema'
 
 module Enrar
   def self.env
