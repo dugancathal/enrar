@@ -9,6 +9,10 @@ describe Enrar::Migration do
     Enrar::Migration.new('CreateTestTable').migration_class_name.must_equal 'CreateTestTable'
   end
 
+  it 'has a version' do
+    Enrar::Migration.new('CreateTestTable').version.to_i.must_be_within_delta Time.now.strftime('%Y%m%d%H%M%S%L').to_i, 2000
+  end
+
   describe 'generating a migration' do
     before(:each) do
       @test_directory = File.expand_path('../../fixtures/test_project', __FILE__)

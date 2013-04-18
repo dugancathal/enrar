@@ -6,7 +6,7 @@ describe 'Sanity' do
   end
 
   describe 'secretfile:generate', 'A test that rake testing works' do
-    after(:all) do
+    after(:each) do
       File.delete '.super-secret'
     end
 

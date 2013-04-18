@@ -5,7 +5,7 @@ module Enrar
     attr_reader :migration_class_name
 
     def initialize(name)
-      @migration_class_name = name.underscore.classify
+      @migration_class_name = name.underscore.camelize
     end
 
     def generate!
@@ -19,7 +19,11 @@ module Enrar
     end
 
     def filename
-      "#{Time.now.strftime('%Y%m%d%H%M%S')}_#{@migration_class_name.underscore}.rb"
+      "#{version}_#{@migration_class_name.underscore}.rb"
+    end
+
+    def version
+      @version ||= Time.now.strftime('%Y%m%d%H%M%S%L')
     end
 
     TEMPLATE = <<-MIGRATION.strip_heredoc
