@@ -2,9 +2,6 @@ require 'enrar'
 
 module Enrar
   class DB
-    def initialize
-    end
-
     def create!
       FileUtils.mkdir_p path
       ActiveRecord::Base.connection
