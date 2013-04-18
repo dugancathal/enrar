@@ -27,7 +27,8 @@ Or install it yourself as:
 After you've added Ernar to your project, add the following lines to your Rakefile:
 
     require 'enrar/task'
-    Enrar::Task.new
+    Enrar.initialize! # Connect to DB
+    Enrar::Task.new # Generate the Rake tasks
 
 Then you can run around almost as if you're in Rails-land.
 
