@@ -4,6 +4,8 @@ require 'pathname'
 require 'active_record'
 require 'active_support/core_ext/string'
 
+require 'rake'
+
 require 'enrar/migration'
 
 module Enrar
