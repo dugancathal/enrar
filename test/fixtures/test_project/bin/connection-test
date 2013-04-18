@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require 'enrar'
+
+Enrar.setup!
+
+puts ActiveRecord::Base.connected?
