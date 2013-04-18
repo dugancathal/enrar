@@ -32,6 +32,11 @@ module Enrar
       task "#{@name}:migrations:generate", [:name] do |t, args|
         Enrar::Migration.new(args[:name]).generate!
       end
+
+      desc "Create the db."
+      task "#{@name}:db:create" do
+        Enrar::DB.new.create!
+      end
       self
     end
   end

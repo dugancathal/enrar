@@ -1,6 +1,6 @@
 require 'test_helper'
 
-describe 'enrar:migrations:generate' do
+describe 'Rake tasks' do
   before(:each) do
     @test_directory = File.expand_path('../../fixtures/test_project', __FILE__)
     ENV['ENRAR_ENV'] = 'development'
@@ -17,8 +17,17 @@ describe 'enrar:migrations:generate' do
     FileUtils.rm_r @test_directory + '/db'
   end
 
-  it 'generates a migration' do
-    i_call_rake_task 'enrar:migrations:generate', 'create_test_table'
-    Dir[@test_directory + '/db/migrate/*_create_test_table.rb'].wont_be_empty
+  describe 'enrar:migrations:generate' do
+    it 'generates a migration' do
+      i_call_rake_task 'enrar:migrations:generate', 'create_test_table'
+      Dir[@test_directory + '/db/migrate/*_create_test_table.rb'].wont_be_empty
+    end
+  end
+
+  describe 'enrar:db:create' do
+    it 'creates the database file' do
+      i_call_rake_task 'enrar:db:create'
+      File.exist?(@test_directory + '/db/development.sqlite3').must_equal true
+    end
   end
 end
